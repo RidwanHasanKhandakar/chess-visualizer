@@ -32,5 +32,8 @@
 <script src="assets/js/arrows.js"></script>
 <script src="assets/js/board.js"></script>
 <script src="assets/js/main.js"></script>
+<footer style="background:#000; color:#ccc; text-align:center; font-size:12px; padding:12px 0; margin-top:20px;">
+    <p style="margin:0;">♟ Chess Visualizer Sandbox • Built by Rahin</p>
+</footer>
 </body>
 </html>
