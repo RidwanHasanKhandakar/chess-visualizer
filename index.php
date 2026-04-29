@@ -12,7 +12,8 @@
 
     <!-- HEADER -->
     <header class="app-header">
-        <div class="logo">♟ Chess Visualizer made by rrhin <span>Lab</span></div>
+        <!-- shad1 ekta mother choddddd-->
+        <div class="logo">♟ Chess Visualizer<span>Lab</span></div>
         <p class="tagline">Visual analysis sandbox for chess learners</p>
     </header>
 
@@ -30,7 +31,7 @@
             <button class="ctrl-btn" id="btn-heatmap" onclick="setMode('heatmap')">🌡 Heatmap</button>
         </div>
     </div>
-
+<!-- shad1 abro ekta mdrfckrr-->
     <!-- BOARD -->
     <div class="board-wrap">
         <div id="board"></div>
