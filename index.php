@@ -12,7 +12,7 @@
 
     <!-- HEADER -->
     <header class="app-header">
-        <div class="logo">♟ Chess Visualizer <span>Lab</span></div>
+        <div class="logo">♟ Chess Visualizer made by rrhin <span>Lab</span></div>
         <p class="tagline">Visual analysis sandbox for chess learners</p>
     </header>
 
