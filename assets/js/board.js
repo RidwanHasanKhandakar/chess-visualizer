@@ -69,12 +69,23 @@ function initBoardUI() {
         draggable: true,
         position: window.boardState,
         pieceTheme: 'assets/img/pieces/{piece}.png',
+        sparePieces: true,
+        dropOffBoard: 'trash',
 
-        onDrop: function (source, target) {
-            let piece = window.boardState[source];
-            if (!piece) return 'snapback';
-            delete window.boardState[source];
-            window.boardState[target] = piece;
+        onDrop: function (source, target, piece) {
+            if (target === 'offboard') {
+                if (source !== 'spare') {
+                    delete window.boardState[source];
+                    runAnalysis();
+                }
+                return;
+            }
+
+            const movingPiece = source === 'spare' ? piece : window.boardState[source];
+            if (!movingPiece) return 'snapback';
+
+            if (source !== 'spare') delete window.boardState[source];
+            window.boardState[target] = movingPiece;
             runAnalysis();
         }
     });
