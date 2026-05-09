@@ -2,7 +2,7 @@
 // CONTROLLED SQUARES
 // What squares does this piece attack/control?
 // For pawns: diagonals only (NOT the forward push square)
-// For all others: same as legal moves
+// For all others: include squares even if occupied by friendly pieces
 // ================================
 function generateControlled(square, piece, board) {
 
@@ -19,7 +19,65 @@ function generateControlled(square, piece, board) {
         return controlled;
     }
 
+    // Knights and kings "control" their destination squares regardless of occupancy.
+    if (type === "N") {
+        let controlled = [];
+        for (let [df, dr] of [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]) {
+            let f = file + df, r = rank + dr;
+            if (f >= 97 && f <= 104 && r >= 1 && r <= 8) {
+                controlled.push(String.fromCharCode(f) + r);
+            }
+        }
+        return controlled;
+    }
+
+    if (type === "K") {
+        let controlled = [];
+        for (let df = -1; df <= 1; df++) {
+            for (let dr = -1; dr <= 1; dr++) {
+                if (df === 0 && dr === 0) continue;
+                let f = file + df, r = rank + dr;
+                if (f >= 97 && f <= 104 && r >= 1 && r <= 8) {
+                    controlled.push(String.fromCharCode(f) + r);
+                }
+            }
+        }
+        return controlled;
+    }
+
+    // Sliding pieces control empty squares until blocked, plus the first blocked square
+    // (whether occupied by enemy OR friendly), and then stop.
+    if (type === "R" || type === "B" || type === "Q") {
+        let dirs = [];
+        if (type === "R" || type === "Q") dirs.push([1,0],[-1,0],[0,1],[0,-1]);
+        if (type === "B" || type === "Q") dirs.push([1,1],[1,-1],[-1,1],[-1,-1]);
+
+        let controlled = [];
+        for (let [dFile, dRank] of dirs) {
+            controlled.push(...rayControlled(file, rank, board, dFile, dRank));
+        }
+        return controlled;
+    }
+
+    // Fallback: should never happen, but keep behavior safe.
     return generateMoves(square, piece, board);
+}
+
+function rayControlled(startFile, startRank, board, dFile, dRank) {
+
+    let controlled = [];
+    let f = startFile + dFile;
+    let r = startRank + dRank;
+
+    while (f >= 97 && f <= 104 && r >= 1 && r <= 8) {
+        let sq = String.fromCharCode(f) + r;
+        controlled.push(sq);
+        if (board[sq]) break; // include first occupied square, then stop
+        f += dFile;
+        r += dRank;
+    }
+
+    return controlled;
 }
 
 
