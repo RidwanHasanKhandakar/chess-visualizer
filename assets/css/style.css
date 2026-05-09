@@ -290,3 +290,75 @@ body {
 .footer-link:hover {
     text-decoration: underline;
 }
+
+/* ================================
+   RESPONSIVE (mobile)
+================================ */
+
+/* spare pieces trays (chessboard.js) */
+[class*="spare-pieces"] {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 18px 12px;
+        align-items: flex-start;
+    }
+
+    .app {
+        gap: 14px;
+        max-width: 520px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .controls-bar {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 16px;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .ctrl-btn {
+        padding: 8px 12px;
+    }
+
+    .board-wrap {
+        padding: 10px;
+    }
+
+    .legend {
+        padding: 14px 14px;
+    }
+
+    .legend-item {
+        font-size: 12px;
+    }
+
+    .heat-labels {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .logo {
+        font-size: 1.35rem;
+    }
+
+    .ctrl-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}
